@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import InputGroup from "./InputGroup";
 import { FaStore } from "react-icons/fa6";
 
+//!!!max length for both username and password needs to be set.!!!
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -56,7 +57,7 @@ const LoginForm = () => {
     <div className="shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex  flex-col justify-center items-center  px-6 py-12 gap-4">
       <div className="flex flex-col gap-4">
         <div className="flex justify-center">
-          <FaStore className="w-16 h-14 text-blue-600" />
+          <FaStore className="w-16 h-14 text-myColor-600" />
         </div>
         <span className="font-bold">Welcome</span>
       </div>
@@ -82,7 +83,7 @@ const LoginForm = () => {
 
         <button
           type="submit"
-          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          className="w-full text-white bg-myColor-700 hover:bg-myColor-800 focus:ring-4 focus:ring-myColor-300 font-medium rounded-md text-sm px-5 py-1.5 me-2 mb-2 dark:bg-myColor-600 dark:hover:bg-myColor-700 focus:outline-none dark:focus:ring-myColor-800"
         >
           Sign In
         </button>
