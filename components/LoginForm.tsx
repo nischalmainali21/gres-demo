@@ -8,7 +8,7 @@ const LoginForm = () => {
     username: "",
     password: "",
   });
-  console.log("formdata", formData);
+  // console.log("formdata", formData);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -21,14 +21,24 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
+      const usersResponse = await fetch("https://dummyjson.com/users");
+      const usersData = await usersResponse.json();
+      // console.log("userdata", usersData.users);
+      // console.log(Math.floor(Math.random() * usersData.users.length));
+
+      // Randomly select a user
+      const randomUser =
+        usersData.users[Math.floor(Math.random() * usersData.users.length)];
+      console.log("🚀 ~ handleFormSubmit ~ randomUser:", randomUser);
+
       const response = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "atuny0",
-          password: "9uQFF1Lh",
+          username: randomUser.username,
+          password: randomUser.password,
         }),
       });
 

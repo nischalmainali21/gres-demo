@@ -36,6 +36,7 @@ const InputGroup = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          required
         />
       </div>
     </div>
