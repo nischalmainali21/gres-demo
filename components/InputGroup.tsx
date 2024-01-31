@@ -1,4 +1,6 @@
 import React from "react";
+import { LoginFormValues } from "@/types";
+import { FieldValues, FieldErrors, UseFormRegister } from "react-hook-form";
 
 type PropsType = {
   inputType: string;
@@ -6,8 +8,8 @@ type PropsType = {
   id: string;
   placeholder?: string;
   labelText: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  register: any;
+  errors: any;
 };
 
 const InputGroup = ({
@@ -16,8 +18,8 @@ const InputGroup = ({
   id,
   placeholder,
   labelText,
-  value,
-  onChange,
+  register,
+  errors,
 }: PropsType) => {
   return (
     <div>
@@ -31,11 +33,12 @@ const InputGroup = ({
           id={id}
           className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20  ring-1 ring-inset ring-myColor-300 placeholder:text-myColor-400 focus:ring-2 focus:ring-inset focus:ring-myColor-600 sm:text-sm sm:leading-6"
           placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          required
+          {...register(name, { required: true })}
         />
       </div>
+      {errors[name] && (
+        <p className="mt-1 text-xs text-myColor-700">{`${labelText} is required`}</p>
+      )}
     </div>
   );
 };

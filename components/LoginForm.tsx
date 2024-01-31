@@ -1,58 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import InputGroup from "./InputGroup";
 import { FaStore } from "react-icons/fa6";
+import useFormValidation from "@/hooks/useFormValidation";
 
 //!!!max length for both username and password needs to be set.!!!
+type FormData = {
+  username: string;
+  password: string;
+};
+
 const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-  // console.log("formdata", formData);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    fieldName: "username" | "password"
-  ) => {
-    setFormData({ ...formData, [fieldName]: e.target.value });
+  const onSubmit = (data: FormData) => {
+    console.log(data);
   };
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const usersResponse = await fetch("https://dummyjson.com/users");
-      const usersData = await usersResponse.json();
-      // console.log("userdata", usersData.users);
-      // console.log(Math.floor(Math.random() * usersData.users.length));
-
-      // Randomly select a user
-      const randomUser =
-        usersData.users[Math.floor(Math.random() * usersData.users.length)];
-      console.log("🚀 ~ handleFormSubmit ~ randomUser:", randomUser);
-
-      const response = await fetch("https://dummyjson.com/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: randomUser.username,
-          password: randomUser.password,
-        }),
-      });
-
-      const data = await response.json();
-      console.log("Login Response:", data);
-
-      // Handle the response, update UI, or perform other actions as needed
-    } catch (error) {
-      console.error("Login failed", error);
-      // Handle errors appropriately
-    }
-  };
-
+  const { handleSubmit, register, errors } = useFormValidation();
   return (
     <div className="shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex  flex-col justify-center items-center  px-6 py-12 gap-4">
       <div className="flex flex-col gap-4">
@@ -61,23 +24,23 @@ const LoginForm = () => {
         </div>
         <span className="font-bold">Welcome</span>
       </div>
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <InputGroup
             inputType="text"
             name="username"
             id="username"
             labelText="Username"
-            value={formData.username}
-            onChange={(e) => handleInputChange(e, "username")}
+            register={register}
+            errors={errors}
           />
           <InputGroup
             inputType="password"
             name="password"
             id="password"
             labelText="Password"
-            value={formData.password}
-            onChange={(e) => handleInputChange(e, "password")}
+            register={register}
+            errors={errors}
           />
         </div>
 
