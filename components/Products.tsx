@@ -7,7 +7,7 @@ import ProductCard from "./ProductCard";
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 10;
+  const limit = 8;
   const totalPages = Math.ceil(100 / limit);
 
   useEffect(() => {
@@ -42,12 +42,12 @@ const Products = () => {
 
   return (
     <div>
-      <div className="flex flex-col gap-4">
+      {/* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {products?.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
