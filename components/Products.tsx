@@ -1,18 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { ProductType, ProductsDataType } from "@/types";
+import Pagination from "./Pagination";
+import ProductCard from "./ProductCard";
 
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
-  const totalPages = 10;
+  const totalPages = Math.ceil(100 / limit);
 
   useEffect(() => {
     const fetchProdcuts = async () => {
       try {
         const skip = (currentPage - 1) * limit;
-        // console.log("skip", skip);
         const response = await fetch(
           `https://dummyjson.com/auth/products/?limit=${limit}${
             skip > 0 ? `&skip=${skip}` : ""
@@ -43,34 +44,15 @@ const Products = () => {
     <div>
       <div className="flex flex-col gap-4">
         {products?.map((product) => (
-          <div key={product.id} className="bg-red-100">
-            <p>{product.title}</p>
-            <p>{product.description}</p>
-            <p>{product.brand}</p>
-            <p>{product.category}</p>
-            <p>{product.price}</p>
-            <p>{product.rating}</p>
-            <p>{product.stock}</p>
-            <p>{product.thumbnail}</p>
-            <p>{product.discountPercentage}</p>
-          </div>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      <div>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span>Page {currentPage}</span>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 };
