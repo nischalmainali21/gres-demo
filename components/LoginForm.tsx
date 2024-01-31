@@ -31,7 +31,17 @@ const LoginForm = () => {
             name="username"
             id="username"
             labelText="Username"
-            register={register}
+            register={register("username", {
+              required: { value: true, message: "Username is required" },
+              maxLength: {
+                value: 30,
+                message: "Username cannot exceed 30 characters",
+              },
+              minLength: {
+                value: 5,
+                message: "Username must be at least 5 characters",
+              },
+            })}
             errors={errors}
           />
           <InputGroup
@@ -39,7 +49,17 @@ const LoginForm = () => {
             name="password"
             id="password"
             labelText="Password"
-            register={register}
+            register={register("password", {
+              required: { value: true, message: "Password is required" },
+              maxLength: {
+                value: 20,
+                message: "Password cannot exceed 20 characters",
+              },
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+            })}
             errors={errors}
           />
         </div>
