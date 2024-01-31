@@ -40,7 +40,7 @@ const InputGroup = ({
         />
       </div>
       {errors[name] && (
-        <p className="mt-1 text-xs text-red-700">{errors[name]?.message}</p>
+        <p className="mt-1 text-xs text-red-900">{errors[name]?.message}</p>
       )}
     </div>
   );

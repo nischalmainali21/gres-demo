@@ -3,16 +3,36 @@ import React from "react";
 import InputGroup from "./InputGroup";
 import { FaStore } from "react-icons/fa6";
 import useFormValidation from "@/hooks/useFormValidation";
-
-//!!!max length for both username and password needs to be set.!!!
-type FormData = {
-  username: string;
-  password: string;
-};
+import { LoginFormValues } from "@/types";
 
 const LoginForm = () => {
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (formData: LoginFormValues) => {
+    // console.log(formData);
+    try {
+      const usersResponse = await fetch("https://dummyjson.com/users");
+      const usersData = await usersResponse.json();
+
+      // Randomly select a user
+      const randomUser =
+        usersData.users[Math.floor(Math.random() * usersData.users.length)];
+      console.log("🚀 ~ handleFormSubmit ~ randomUser:", randomUser);
+
+      const response = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: randomUser.username,
+          password: randomUser.password,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Login Response:", data);
+    } catch (error) {
+      console.error("Login failed", error);
+    }
   };
 
   const { handleSubmit, register, errors } = useFormValidation();
