@@ -7,7 +7,7 @@ import ProductCard from "./ProductCard";
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 8;
+  const limit = 9;
   const totalPages = Math.ceil(100 / limit);
 
   useEffect(() => {
@@ -22,9 +22,9 @@ const Products = () => {
             method: "GET",
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJqdHJlbGV2ZW41IiwiZW1haWwiOiJqdHJlbGV2ZW41QG5ocy51ayIsImZpcnN0TmFtZSI6IkFsaXNvbiIsImxhc3ROYW1lIjoiUmVpY2hlcnQiLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vcm9ib2hhc2gub3JnL0FsaXNvbi5wbmc_c2V0PXNldDQiLCJpYXQiOjE3MDY3MTMwMDAsImV4cCI6MTcwNjcxNjYwMH0.fufrhyfFtFFjaYMdjmS-8ws5kE2nshnLK5x2HX3gK7A",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvSmVhbm5lLnBuZz9zZXQ9c2V0NCIsImlhdCI6MTcwNjc3ODA1NCwiZXhwIjoxNzA2NzgxNjU0fQ.DyGVdGSgMarHthYCiA38KfXk_Oiz6vhdN52OVHSuQkc",
             },
-          }
+          },
         );
         const productsData: ProductsDataType = await response.json();
         setProducts(productsData.products);
@@ -41,18 +41,25 @@ const Products = () => {
   };
 
   return (
-    <div>
-      {/* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {products?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    <div className="relative">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 md:grid-cols-5 ">
+        <div className="col-span-1">Filter</div>
+        <div className="sm:col-span-3 md:col-span-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {products?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handlePageChange={handlePageChange}
-      />
+      {/* pagination className and position to be checked */}
+      <div className="absolute -bottom-20 right-10">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

@@ -8,38 +8,39 @@ interface ProductCardProps {
 }
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div className="border m-4 rounded shadow-md flex flex-col items-center">
-      <div>
+    <div className="group mb-4">
+      <div className="relative mx-2 my-2 h-[290px] rounded-xl border shadow-md">
         {product.thumbnail && (
           <>
             <Image
               alt={product.title}
               src={product.thumbnail}
-              width={500}
-              height={100}
+              fill
+              sizes="(min-width: 200px) 50vw,(min-width:768px) 100vw"
+              className="rounded-xl"
+              priority
             />
           </>
         )}
       </div>
-      <div className="flex flex-col">
-        <p className="truncate font-bold text-lg mt-4 items-start">
+      <div className="mt-2 flex flex-col items-center gap-1">
+        {/* upon hovering the whole container underline product title */}
+        <span className="text-lg font-bold underline-offset-2 group-hover:underline">
           {product.title}
-        </p>
-
-        <div className="m-1 p-1">
-          <span className="text-bold">Rs. {product.price}</span>
-          <span className="text-[0.7rem] absolute top-2 ">
+        </span>
+        <div className="flex items-center gap-1">
+          <span className="text text-sm font-light line-through">
+            &#36;{product.price}
+          </span>
+          <span className="text-xl font-bold">
+            &#36;
             {Math.floor(
-              product.price - (product.discountPercentage * product.price) / 100
+              product.price -
+                (product.discountPercentage * product.price) / 100,
             )}
           </span>
         </div>
-        <p>{product.rating}</p>
       </div>
-      {/* <p>{product.description}</p>
-      <p>{product.brand}</p>
-      <p>{product.category}</p>
-      <p>{product.stock}</p> */}
     </div>
   );
 };
