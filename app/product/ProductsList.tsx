@@ -60,9 +60,9 @@ const ProductsList: React.FC<ProductListProps> = ({
         <div className="col-span-1">Filter</div>
         <div className="sm:col-span-3 md:col-span-4">
           {loading ? (
-            <p className="flex h-screen items-center justify-center text-blue-900">
+            <div className="flex h-screen items-center justify-center text-blue-900">
               <Spinner />
-            </p>
+            </div>
           ) : (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {products?.map((product) => (
