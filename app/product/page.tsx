@@ -6,8 +6,9 @@ import Loading from "./loading";
 
 const Product = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const limit = 9;
-  const totalPages = Math.ceil(100 / limit);
+  console.log("totalpages", totalPages);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -15,7 +16,11 @@ const Product = () => {
   return (
     <div className="relative">
       <Suspense fallback={<Loading />}>
-        <ProductsList currentPage={currentPage} limit={limit} />
+        <ProductsList
+          currentPage={currentPage}
+          limit={limit}
+          setTotalPages={setTotalPages}
+        />
       </Suspense>
 
       <div className="absolute -bottom-20 right-10">

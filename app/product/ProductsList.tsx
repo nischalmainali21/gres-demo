@@ -1,10 +1,12 @@
-import React from "react";
-import { ProductsDataType } from "@/types";
+"use client";
+import React, { useEffect, useState } from "react";
+import { ProductType, ProductsDataType } from "@/types";
 import ProductCard from "../../components/ProductCard";
 
 type ProductListProps = {
   limit: number;
   currentPage: number;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
 };
 
 async function getProducts(currentPage: number, limit: number) {
@@ -24,12 +26,24 @@ async function getProducts(currentPage: number, limit: number) {
   return response.json();
 }
 
-const ProductsList: React.FC<ProductListProps> = async ({
+const ProductsList: React.FC<ProductListProps> = ({
   currentPage,
   limit,
+  setTotalPages,
 }) => {
-  const productsData: ProductsDataType = await getProducts(currentPage, limit);
-  const products = productsData.products;
+  const [products, setProducts] = useState<ProductType[]>([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsData: ProductsDataType = await getProducts(
+        currentPage,
+        limit,
+      );
+      const products = productsData.products;
+      setTotalPages(Math.ceil(productsData.total / limit));
+      setProducts(products);
+    };
+    fetchProducts();
+  }, [currentPage]);
 
   return (
     <div className="relative">
