@@ -1,8 +1,7 @@
 "use client";
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import ProductsList from "@/app/product/ProductsList";
 import Pagination from "@/components/Pagination";
-import Loading from "./loading";
 
 const Product = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,13 +13,11 @@ const Product = () => {
   };
   return (
     <div className="relative">
-      <Suspense fallback={<Loading />}>
-        <ProductsList
-          currentPage={currentPage}
-          limit={limit}
-          setTotalPages={setTotalPages}
-        />
-      </Suspense>
+      <ProductsList
+        currentPage={currentPage}
+        limit={limit}
+        setTotalPages={setTotalPages}
+      />
 
       <div className="absolute -bottom-20 right-10">
         <Pagination

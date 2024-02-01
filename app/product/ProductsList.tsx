@@ -19,7 +19,7 @@ async function getProducts(currentPage: number, limit: number) {
       method: "GET",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJoYmluZ2xleTEiLCJlbWFpbCI6ImhiaW5nbGV5MUBwbGFsYS5vci5qcCIsImZpcnN0TmFtZSI6IlNoZWxkb24iLCJsYXN0TmFtZSI6IlF1aWdsZXkiLCJnZW5kZXIiOiJtYWxlIiwiaW1hZ2UiOiJodHRwczovL3JvYm9oYXNoLm9yZy9TaGVsZG9uLnBuZz9zZXQ9c2V0NCIsImlhdCI6MTcwNjc4NTUyOCwiZXhwIjoxNzA2Nzg5MTI4fQ.CIgqqu_OxrLc1MF9OpTkWbn4cdyhW9b8SDIJViNIis0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJ5cmFpZ2F0dDMiLCJlbWFpbCI6InlyYWlnYXR0M0BuYXR1cmUuY29tIiwiZmlyc3ROYW1lIjoiTWlsZXMiLCJsYXN0TmFtZSI6IkN1bW1lcmF0YSIsImdlbmRlciI6Im1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vcm9ib2hhc2gub3JnL01pbGVzLnBuZz9zZXQ9c2V0NCIsImlhdCI6MTcwNjc4OTE5MSwiZXhwIjoxNzA2NzkyNzkxfQ.OtnCKfk3p1xaQ2IiW2LVrDF_6auW6_FHNSWAzCBJ2ME",
       },
     },
   );
@@ -32,15 +32,22 @@ const ProductsList: React.FC<ProductListProps> = ({
   setTotalPages,
 }) => {
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchProducts = async () => {
-      const productsData: ProductsDataType = await getProducts(
-        currentPage,
-        limit,
-      );
-      const products = productsData.products;
-      setTotalPages((prev) => (prev = Math.ceil(productsData.total / limit)));
-      setProducts(products);
+      try {
+        const productsData: ProductsDataType = await getProducts(
+          currentPage,
+          limit,
+        );
+        const products = productsData.products;
+        setTotalPages((prev) => (prev = Math.ceil(productsData.total / limit)));
+        setProducts(products);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchProducts();
   }, [currentPage]);
@@ -50,11 +57,17 @@ const ProductsList: React.FC<ProductListProps> = ({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 md:grid-cols-5 ">
         <div className="col-span-1">Filter</div>
         <div className="sm:col-span-3 md:col-span-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {products?.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {loading ? (
+            <p className="flex h-screen items-center justify-center text-blue-900">
+              Loading...
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {products?.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
