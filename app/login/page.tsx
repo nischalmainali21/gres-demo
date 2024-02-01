@@ -1,9 +1,9 @@
 import LoginForm from "@/components/LoginForm";
 import React from "react";
 
-const login = () => {
+const Login = () => {
   return (
-    <div className="p-4 m-0 flex justify-center items-center h-[100vh]">
+    <div className="m-0 flex h-[100vh] items-center justify-center p-4">
       <div className="w-[50vw] min-w-[310px] max-w-[500px]">
         <LoginForm />
       </div>
@@ -11,4 +11,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
