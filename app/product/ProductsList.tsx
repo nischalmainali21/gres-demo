@@ -39,7 +39,7 @@ const ProductsList: React.FC<ProductListProps> = ({
         limit,
       );
       const products = productsData.products;
-      setTotalPages(Math.ceil(productsData.total / limit));
+      setTotalPages((prev) => (prev = Math.ceil(productsData.total / limit)));
       setProducts(products);
     };
     fetchProducts();

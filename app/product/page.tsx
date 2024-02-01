@@ -8,7 +8,6 @@ const Product = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const limit = 9;
-  console.log("totalpages", totalPages);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
