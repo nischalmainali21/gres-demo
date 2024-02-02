@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ProductType, ProductsDataType } from "@/types";
 import ProductCard from "../../components/ProductCard";
 import Spinner from "@/components/Spinner";
+import Link from "next/link";
 
 type ProductListProps = {
   limit: number;
@@ -66,7 +67,9 @@ const ProductsList: React.FC<ProductListProps> = ({
           ) : (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {products?.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <Link key={product.id} href={`/product/${product.id}`}>
+                  <ProductCard product={product} />
+                </Link>
               ))}
             </div>
           )}
