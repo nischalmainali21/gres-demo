@@ -4,8 +4,21 @@ import InputGroup from "./InputGroup";
 import { FaStore } from "react-icons/fa6";
 import useFormValidation from "@/hooks/useFormValidation";
 import { LoginFormValues } from "@/types";
+import { useRouter } from "next/navigation";
+
+// type LoginResponseType = {
+//   email: string;
+//   firstName: string;
+//   id: number;
+//   username: string;
+//   lastName: string;
+//   gender: string;
+//   image: string;
+//   token: string;
+// };
 
 const LoginForm = () => {
+  const router = useRouter();
   const onSubmit = async (formData: LoginFormValues) => {
     // console.log(formData);
     try {
@@ -27,9 +40,11 @@ const LoginForm = () => {
           password: randomUser.password,
         }),
       });
-
-      const data = await response.json();
-      console.log("Login Response:", data);
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("userToken", data.token);
+        router.push("/product");
+      }
     } catch (error) {
       console.error("Login failed", error);
     }
@@ -37,10 +52,10 @@ const LoginForm = () => {
 
   const { handleSubmit, register, errors } = useFormValidation();
   return (
-    <div className="shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex  flex-col justify-center items-center  px-6 py-12 gap-4">
+    <div className="flex flex-col  items-center justify-center gap-4  px-6 py-12 shadow-[0_8px_30px_rgb(0,0,0,0.25)]">
       <div className="flex flex-col gap-4">
         <div className="flex justify-center">
-          <FaStore className="w-16 h-14 text-myColor-600" />
+          <FaStore className="h-14 w-16 text-myColor-600" />
         </div>
         <span className="font-bold">Welcome</span>
       </div>
@@ -86,7 +101,7 @@ const LoginForm = () => {
 
         <button
           type="submit"
-          className="w-full text-white bg-myColor-700 hover:bg-myColor-800 focus:ring-4 focus:ring-myColor-300 font-medium rounded-md text-sm px-5 py-1.5 me-2 mb-2 dark:bg-myColor-600 dark:hover:bg-myColor-700 focus:outline-none dark:focus:ring-myColor-800"
+          className="mb-2 me-2 w-full rounded-md bg-myColor-700 px-5 py-1.5 text-sm font-medium text-white hover:bg-myColor-800 focus:outline-none focus:ring-4 focus:ring-myColor-300 dark:bg-myColor-600 dark:hover:bg-myColor-700 dark:focus:ring-myColor-800"
         >
           Sign In
         </button>
