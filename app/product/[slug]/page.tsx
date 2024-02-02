@@ -19,7 +19,7 @@ const ProductDetail = async ({ params }: PropsType) => {
   const data: ProductType = await getProductData(params.slug);
   // console.log("data", data);
   return (
-    <div className="grid grid-cols-2 gap-4 p-8">
+    <div className="grid grid-cols-1 p-2 sm:grid-cols-2 sm:gap-4 sm:p-4 md:p-8">
       <div>
         <ImageSlider images={data.images} title={data.title} />
       </div>
