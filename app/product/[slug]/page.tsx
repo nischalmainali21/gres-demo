@@ -1,4 +1,5 @@
 import ImageCarousel from "@/components/ImageCarousel";
+import ProductDetailDescription from "@/components/ProductDetailDescription";
 import { ProductType } from "@/types";
 import React from "react";
 
@@ -20,10 +21,21 @@ const ProductDetail = async ({ params }: PropsType) => {
   // console.log("data", data);
   return (
     <div className="grid grid-cols-1 p-2 sm:grid-cols-2 sm:gap-4 sm:p-4 md:p-6">
-      <div className="col-span-1">
+      <div className="col-span-1 mb-4 sm:mb-0">
         <ImageCarousel images={data.images} title={data.title} />
       </div>
-      <div>Product detail</div>
+      <div className="col-span-1 flex flex-col gap-2 sm:ml-4 sm:p-8">
+        <ProductDetailDescription
+          title={data.title}
+          description={data.description}
+          price={data.price}
+          discountPercentage={data.discountPercentage}
+          rating={data.rating}
+          stock={data.stock}
+          brand={data.brand}
+          category={data.category}
+        />
+      </div>
     </div>
   );
 };

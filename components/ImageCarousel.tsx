@@ -46,7 +46,7 @@ const ImageCarousel = ({ images, title }: PropsType) => {
 
   const allImages = images.map((item, index) => ({ index, url: item }));
   return (
-    <div className="sm:ml-0 sm:p-8">
+    <div className="sm:p-8">
       <div className="flex flex-col gap-4">
         <Carousel setApi={setSlideApi}>
           <CarouselContent>
