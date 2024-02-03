@@ -58,18 +58,18 @@ const ImageCarousel = ({ images, title }: PropsType) => {
                     fill
                     alt={`${title} ${selectedIndex} image`}
                     sizes="(min-width: 200px) 50vw,(min-width:768px) 100vw"
-                    className="rounded-xl"
+                    className={`rounded-xl`}
                   />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          {/* <div className="hidden sm:block">
+          <div className="hidden sm:block">
             <CarouselPrevious />
           </div>
           <div className="hidden sm:block">
             <CarouselNext />
-          </div> */}
+          </div>
         </Carousel>
         {/* thumbnail images */}
         <Carousel
@@ -81,9 +81,12 @@ const ImageCarousel = ({ images, title }: PropsType) => {
         >
           <CarouselContent>
             {allImages.map((item) => (
-              <CarouselItem key={`${title}${item.index}`} className="basis-1/5">
+              <CarouselItem
+                key={`${title}${item.index}`}
+                className={`${allImages.length == 4 ? "basis-1/4" : "basis-1/5"} `}
+              >
                 <div
-                  className="flex justify-center rounded-md border shadow-md"
+                  className={`flex justify-center rounded-md border shadow-md`}
                   onClick={() => onThumbClick(item.index)}
                 >
                   <Image
@@ -91,7 +94,7 @@ const ImageCarousel = ({ images, title }: PropsType) => {
                     width={200}
                     height={200}
                     alt={`thumnail ${title} ${item.index} image`}
-                    className="h-24 w-full cursor-pointer rounded-md"
+                    className={`h-24 w-full cursor-pointer rounded-md ${item.index === selectedIndex ? "border-b-4 border-green-600" : ""}`}
                   />
                 </div>
               </CarouselItem>
