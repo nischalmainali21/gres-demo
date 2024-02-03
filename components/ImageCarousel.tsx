@@ -78,6 +78,7 @@ const ImageCarousel = ({ images, title }: PropsType) => {
             dragFree: true,
           }}
           setApi={setThumbsApi}
+          className="hidden sm:block"
         >
           <CarouselContent>
             {allImages.map((item) => (
