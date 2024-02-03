@@ -1,4 +1,4 @@
-import ImageSlider from "@/components/ImageSlider";
+import ImageCarousel from "@/components/ImageCarousel";
 import { ProductType } from "@/types";
 import React from "react";
 
@@ -19,9 +19,9 @@ const ProductDetail = async ({ params }: PropsType) => {
   const data: ProductType = await getProductData(params.slug);
   // console.log("data", data);
   return (
-    <div className="grid grid-cols-1 p-2 sm:grid-cols-2 sm:gap-4 sm:p-4 md:p-8">
-      <div>
-        <ImageSlider images={data.images} title={data.title} />
+    <div className="grid grid-cols-1 p-2 sm:grid-cols-2 sm:gap-4 sm:p-4 md:p-6">
+      <div className="col-span-1">
+        <ImageCarousel images={data.images} title={data.title} />
       </div>
       <div>Product detail</div>
     </div>
