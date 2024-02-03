@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Rating from "./Rating";
 
 export interface PropsType
   extends Omit<ProductType, "id" | "thumbnail" | "images"> {}
@@ -32,6 +33,16 @@ const ProductDetailDescription = ({
               .map((word) => word[0].toUpperCase() + word.substring(1))
               .join(" ")}
           </CardTitle>
+          <CardDescription className="">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: Math.floor(rating) }).map((_, index) => (
+                  <Rating key={index} />
+                ))}
+              </div>
+              <span>{rating} out of 5</span>
+            </div>
+          </CardDescription>
           <CardDescription className="flex gap-4">
             <p>
               <span className="font-semibold">Brand:</span> {brand}
