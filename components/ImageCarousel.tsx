@@ -83,7 +83,7 @@ const ImageCarousel = ({ images, title }: PropsType) => {
             {allImages.map((item) => (
               <CarouselItem
                 key={`${title}${item.index}`}
-                className={`${allImages.length == 4 ? "basis-1/4" : "basis-1/5"} `}
+                className={`${allImages.length == 3 ? "basis-1/3" : allImages.length == 4 ? "basis-1/4" : "basis-1/5"} `}
               >
                 <div
                   className={`flex justify-center rounded-md border shadow-md`}
@@ -94,7 +94,7 @@ const ImageCarousel = ({ images, title }: PropsType) => {
                     width={200}
                     height={200}
                     alt={`thumnail ${title} ${item.index} image`}
-                    className={`h-24 w-full cursor-pointer rounded-md ${item.index === selectedIndex ? "border-b-4 border-green-600" : ""}`}
+                    className={`h-24 w-full cursor-pointer rounded-md ${item.index === selectedIndex ? "border-b-4 border-green-300" : ""}`}
                   />
                 </div>
               </CarouselItem>
