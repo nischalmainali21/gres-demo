@@ -25,7 +25,7 @@ async function getProducts(currentPage: number, limit: number) {
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${userToken?.value}`,
       },
     },
   );
