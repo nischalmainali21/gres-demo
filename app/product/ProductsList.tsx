@@ -4,6 +4,7 @@ import { ProductType, ProductsDataType } from "@/types";
 import ProductCard from "../../components/ProductCard";
 import Spinner from "@/components/Spinner";
 import Link from "next/link";
+import { obtain } from "../action";
 
 type ProductListProps = {
   limit: number;
@@ -12,7 +13,10 @@ type ProductListProps = {
 };
 
 async function getProducts(currentPage: number, limit: number) {
-  const userToken = localStorage.getItem("userToken");
+  // const userToken = localStorage.getItem("userToken");
+  // const userToken = obtain();
+  // console.log(userToken);
+  const userToken = await obtain();
   const skip = (currentPage - 1) * limit;
   const response = await fetch(
     `https://dummyjson.com/auth/products/?limit=${limit}${

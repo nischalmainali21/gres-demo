@@ -5,6 +5,7 @@ import { FaStore } from "react-icons/fa6";
 import useFormValidation from "@/hooks/useFormValidation";
 import { LoginFormValues } from "@/types";
 import { useRouter } from "next/navigation";
+import { create } from "@/app/action";
 
 // type LoginResponseType = {
 //   email: string;
@@ -42,7 +43,8 @@ const LoginForm = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("userToken", data.token);
+        // localStorage.setItem("userToken", data.token);
+        await create(data.token);
         router.push("/product");
       }
     } catch (error) {
