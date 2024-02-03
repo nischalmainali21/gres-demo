@@ -46,19 +46,19 @@ const ProductDetailDescription = ({
         </CardHeader>
         <CardContent>
           <div className=" flex justify-center">
-            <Card className="w-[60%]">
+            <Card className="w-[100%] lg:w-[60%]">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <span className="text-[20px] font-light line-through">
+                    <span className="text-base font-light line-through lg:text-[20px]">
                       &#36;{price}
                     </span>
-                    <span className="text-[50px] font-bold">
+                    <span className="text-2xl font-bold sm:text-3xl md:text-4xl lg:text-[50px]">
                       &#36;
                       {Math.floor(price - (discountPercentage * price) / 100)}
                     </span>
                   </div>
-                  <div className="text-[30px] font-normal">
+                  <div className="text-base font-bold  sm:font-normal lg:text-[30px]">
                     {discountPercentage}% off
                   </div>
                 </CardTitle>

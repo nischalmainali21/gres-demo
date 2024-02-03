@@ -24,7 +24,7 @@ const ProductDetail = async ({ params }: PropsType) => {
       <div className="col-span-1 mb-4 sm:mb-0">
         <ImageCarousel images={data.images} title={data.title} />
       </div>
-      <div className="col-span-1 flex flex-col gap-2 sm:ml-4 sm:p-8">
+      <div className="col-span-1 flex max-w-[1000px] flex-col gap-2 sm:ml-4">
         <ProductDetailDescription
           title={data.title}
           description={data.description}
