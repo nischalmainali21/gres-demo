@@ -20,7 +20,7 @@ const Product = () => {
         setCurrentPage={setCurrentPage}
       />
 
-      <div className="grid grid-flow-col grid-rows-2 sm:flex sm:justify-center">
+      <div className="">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

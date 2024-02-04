@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "./ui/button";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 type PropsType = {
   currentPage: number;
@@ -12,31 +14,29 @@ const Pagination = ({
   totalPages,
 }: PropsType) => {
   return (
-    <div>
-      {/* <button
+    <div className="flex items-center gap-4">
+      <Button
+        variant="outline"
+        size="icon"
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        Previous
-      </button>
-      <span>Page {currentPage}</span>
-      <button
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+      <span className="font-semibold">
+        Page{" "}
+        <span className=" rounded-md border-2 border-myColor-600 p-2 px-4">
+          {currentPage}
+        </span>
+      </span>
+      <Button
+        variant="outline"
+        size="icon"
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        Next
-      </button> */}
-      <div className="flex gap-1">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`relative z-10 inline-flex items-center  rounded-lg px-4 py-2 text-sm font-semibold text-myColor-900 focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-myColor-600  ${currentPage === index + 1 ? "bg-myColor-600 text-stone-100" : "bg-red-100"}`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+        <ChevronRight className="h-4 w-4" />
+      </Button>
     </div>
   );
 };
