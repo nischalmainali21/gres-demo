@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -57,19 +56,19 @@ const ProductDetailDescription = ({
         </CardHeader>
         <CardContent>
           <div className=" flex justify-center">
-            <Card className="w-[100%] lg:w-[60%]">
+            <Card className="w-[100%]  lg:w-[80%] xl:w-[60%]">
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <span className="text-base font-light line-through lg:text-[20px]">
                       &#36;{price}
                     </span>
-                    <span className="text-2xl font-bold sm:text-3xl md:text-4xl lg:text-[50px]">
+                    <span className="text-2xl font-bold sm:text-3xl md:text-3xl lg:text-[40px]">
                       &#36;
                       {Math.floor(price - (discountPercentage * price) / 100)}
                     </span>
                   </div>
-                  <div className="text-base font-bold  sm:font-normal lg:text-[30px]">
+                  <div className="text-base font-bold  sm:font-normal lg:text-[20px]">
                     {discountPercentage}% off
                   </div>
                 </CardTitle>

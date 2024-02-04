@@ -31,8 +31,6 @@ const ImageCarousel = ({ images, title }: PropsType) => {
 
   const onSelect = useCallback(() => {
     if (!slideApi || !thumbsApi) return;
-    console.log("on select entered");
-    console.log("valueofselectedScrollSnap", slideApi.selectedScrollSnap());
     setSelectedIndex(slideApi.selectedScrollSnap());
     thumbsApi.scrollTo(slideApi.selectedScrollSnap());
   }, [slideApi, thumbsApi, setSelectedIndex]);
