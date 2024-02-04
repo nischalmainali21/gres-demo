@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "cdn.dummyjson.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "robohash.org",
+        port: "",
+      },
     ],
   },
 };
