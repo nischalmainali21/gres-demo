@@ -36,7 +36,7 @@ const Navbar = ({ userToken }: PropsType) => {
   const handleClick = () => setNav(!nav);
 
   function handleAvatar() {
-    console.log("image clicked");
+    // console.log("image clicked");
     setOpen((prev) => !prev);
   }
 

@@ -29,7 +29,7 @@ const LoginForm = () => {
       // Randomly select a user
       const randomUser =
         usersData.users[Math.floor(Math.random() * usersData.users.length)];
-      console.log("🚀 ~ handleFormSubmit ~ randomUser:", randomUser);
+      // console.log("🚀 ~ handleFormSubmit ~ randomUser:", randomUser);
 
       const response = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",

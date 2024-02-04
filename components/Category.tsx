@@ -6,7 +6,7 @@ type PropsType = {
 };
 
 const Category = ({ categories, onSelectCategory }: PropsType) => {
-  console.log(categories.length);
+  // console.log(categories.length);
   return (
     <div className="p-2">
       <select
