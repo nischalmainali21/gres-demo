@@ -5,9 +5,9 @@ import { IoMenu } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { FaStore } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
-import { obtain } from "@/app/action";
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
+import { remove } from "@/app/action";
 
 type DecodeTokenType = {
   id: number;
@@ -28,11 +28,11 @@ const Navbar = ({ userToken }: PropsType) => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const [open, setOpen] = useState(false);
-  //   console.log(userToken);
-  const decodedToken: DecodeTokenType = jwtDecode(userToken.value);
-  //   console.log(decodedToken);
-  const { email, image } = decodedToken;
-  //   console.log(username, email);
+  let decodedToken: DecodeTokenType | null = null;
+  if (userToken.value) {
+    decodedToken = jwtDecode(userToken?.value);
+  }
+  const { email, image } = decodedToken || { email: "", image: "" };
 
   function handleAvatar() {
     console.log("image clicked");
@@ -40,12 +40,14 @@ const Navbar = ({ userToken }: PropsType) => {
   }
 
   function handleLogOut() {
-    console.log("logout the user");
+    setNav(false);
+    remove("userToken");
   }
+
   return (
     <nav>
       <div
-        className={`relative z-10  h-[60px] w-screen shadow-lg sm:h-[80px] ${!nav ? "" : "mb-44"}`}
+        className={`relative z-10  h-[60px] w-screen shadow-lg sm:h-[80px] ${!nav ? "" : "mb-52"}`}
       >
         <div className="flex h-full w-full items-center justify-between px-2">
           <Link href="/">
@@ -72,17 +74,7 @@ const Navbar = ({ userToken }: PropsType) => {
           </ul>
 
           <div className="mx-16 hidden lg:flex">
-            {/* {!userToken && (
-              <div>
-                <Link href="/login">
-                  <button className="mr-4 rounded-full bg-transparent py-3 text-black hover:bg-indigo-600 hover:text-white lg:px-8">
-                    Sign In
-                  </button>
-                </Link>
-              </div>
-            )} */}
-
-            {userToken && (
+            {userToken.value && (
               <div
                 className="relative h-12 w-16 cursor-pointer px-8 "
                 onClick={handleAvatar}
@@ -109,9 +101,9 @@ const Navbar = ({ userToken }: PropsType) => {
           </div>
           <div className="block lg:hidden" onClick={handleClick}>
             {!nav ? (
-              <IoMenu className="h-8 w-10" />
+              <IoMenu className="h-8 w-10 cursor-pointer" />
             ) : (
-              <RxCross1 className="h-8 w-10" />
+              <RxCross1 className="h-8 w-10 cursor-pointer" />
             )}
           </div>
         </div>
@@ -120,15 +112,17 @@ const Navbar = ({ userToken }: PropsType) => {
           className={
             !nav
               ? "hidden"
-              : "mt-2 flex h-[150px] w-full flex-col items-center justify-center  gap-4 rounded-lg px-8 py-8 text-center shadow-lg lg:hidden"
+              : "mt-2 flex w-full flex-col items-center justify-around  gap-2 rounded-lg px-8 py-4 text-center shadow-lg lg:hidden"
           }
         >
-          <li className="flex w-full items-center justify-center gap-4">
-            <div className="relative h-8 w-8">
-              <Image src={image} alt="user profile" fill />
-            </div>
-            <div className="text-[#474bd8]">{email}</div>
-          </li>
+          {userToken.value && (
+            <li className="flex w-full items-center justify-center gap-4">
+              <div className="relative h-8 w-8">
+                <Image src={image} alt="user profile" fill />
+              </div>
+              <div className="text-[#474bd8]">{email}</div>
+            </li>
+          )}
           <li className="w-full">
             <Link
               href="/product"
@@ -145,9 +139,14 @@ const Navbar = ({ userToken }: PropsType) => {
               Stats
             </Link>
           </li>
-          <li onClick={handleLogOut} className="w-full hover:bg-myColor-600">
-            Log Out
-          </li>
+          {userToken.value && (
+            <li
+              onClick={handleLogOut}
+              className="cursor-pointer rounded-lg bg-[#ec41c1] p-2"
+            >
+              Log Out
+            </li>
+          )}
         </ul>
       </div>
     </nav>

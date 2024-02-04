@@ -1,6 +1,7 @@
 "use server";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
+import { redirect } from "next/navigation";
 
 export async function create(token: string) {
   cookies().set({ name: "userToken", value: token, httpOnly: true });
@@ -14,6 +15,7 @@ export async function obtain() {
 
 export async function remove(tokenName: string) {
   cookies().delete(tokenName);
+  redirect("/login");
 }
 
 export async function isExpired(token: string) {
