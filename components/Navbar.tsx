@@ -80,7 +80,14 @@ const Navbar = ({ userToken }: PropsType) => {
                 className="relative h-12 w-16 cursor-pointer px-8 "
                 onClick={handleAvatar}
               >
-                <Image src={image} alt="user profile" fill />
+                <Image
+                  src={image}
+                  alt="user profile"
+                  fill
+                  sizes="(min-width: 200px) 50vw,(min-width:768px) 100vw"
+                  priority={false}
+                  quality={50}
+                />
 
                 <ul
                   className={
