@@ -16,17 +16,17 @@ export async function remove(tokenName: string) {
   cookies().delete(tokenName);
 }
 
-// export async function isExpired(token: string) {
-//   if (!token) {
-//     return true;
-//   }
-//   const decodedToken = jwtDecode(token);
-//   const currentTimestamp = Math.floor(Date.now() / 1000);
+export async function isExpired(token: string) {
+  if (!token) {
+    return true;
+  }
+  const decodedToken = jwtDecode(token);
+  const currentTimestamp = Math.floor(Date.now() / 1000);
 
-//   if (decodedToken.exp) {
-//     return decodedToken.exp < currentTimestamp;
-//   }
-// }
+  if (decodedToken.exp) {
+    return decodedToken.exp < currentTimestamp;
+  }
+}
 
 // export async function shouldRefreshToken(token: string) {
 //   const expiryThreshold = 15 * 60 * 1000; // 15 minutes in milliseconds
