@@ -20,7 +20,7 @@ const Product = () => {
         setCurrentPage={setCurrentPage}
       />
 
-      <div className="">
+      <div className="flex justify-center md:mr-8 md:justify-end">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

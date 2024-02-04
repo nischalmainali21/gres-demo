@@ -7,6 +7,11 @@ interface CategoryCount {
   [category: string]: number;
 }
 
+interface CategoryDataItem {
+  name: string;
+  value: number;
+}
+
 const getCategoryData = async () => {
   const userToken = await obtain();
   try {
@@ -44,12 +49,56 @@ const getCategoryData = async () => {
   }
 };
 
+const aggregateCategories = (data: CategoryDataItem[]) => {
+  const aggregatedData = data.reduce((acc, curr) => {
+    const categoryName = getCategoryHigherLevel(curr.name); // Implement this function
+    acc[categoryName] = (acc[categoryName] || 0) + curr.value;
+    return acc;
+  }, {} as CategoryCount);
+
+  // Convert the aggregated data back to an array
+  const result = Object.entries(aggregatedData).map(([name, value]) => ({
+    name,
+    value,
+  }));
+  return result;
+};
+
+const getCategoryHigherLevel = (subcategory: string) => {
+  if (subcategory.startsWith("mens")) {
+    return "Mens";
+  } else if (subcategory.startsWith("womens")) {
+    return "Womens";
+  } else if (subcategory === "smartphones" || subcategory === "laptops") {
+    return "Electronics";
+  } else if (
+    subcategory === "skincare" ||
+    subcategory === "fragrances" ||
+    subcategory === "sunglasses"
+  ) {
+    return "Beauty";
+  } else if (subcategory === "automotive" || subcategory === "motorcycle") {
+    return "Vehicle";
+  } else if (
+    subcategory === "furniture" ||
+    subcategory === "home-decoration" ||
+    subcategory === "lighting"
+  ) {
+    return "Home";
+  } else {
+    return subcategory;
+  }
+};
+
 const Stats = async () => {
   const categoryData = await getCategoryData();
+  const subcategory = aggregateCategories(categoryData);
+  // console.log(subcategory);
+
   // console.log(categoryData);
   return (
     <div>
-      <Piechart categoryData={categoryData} />
+      <Piechart categoryData={categoryData} subcategory={subcategory} />
     </div>
   );
 };
