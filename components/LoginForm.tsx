@@ -39,6 +39,7 @@ const LoginForm = () => {
         body: JSON.stringify({
           username: randomUser.username,
           password: randomUser.password,
+          expiresInMins: 1,
         }),
       });
       if (response.ok) {
