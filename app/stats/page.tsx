@@ -1,6 +1,7 @@
 import { ProductsDataType } from "@/types";
 import React from "react";
 import { obtain } from "../action";
+import Piechart from "@/components/Piechart";
 
 interface CategoryCount {
   [category: string]: number;
@@ -45,8 +46,12 @@ const getCategoryData = async () => {
 
 const Stats = async () => {
   const categoryData = await getCategoryData();
-  console.log(categoryData);
-  return <div>Stats</div>;
+  // console.log(categoryData);
+  return (
+    <div>
+      <Piechart categoryData={categoryData} />
+    </div>
+  );
 };
 
 export default Stats;
