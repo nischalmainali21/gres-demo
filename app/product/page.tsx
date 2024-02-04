@@ -12,7 +12,7 @@ const Product = () => {
     setCurrentPage(newPage);
   };
   return (
-    <div className="relative">
+    <div className="relative mt-4">
       <ProductsList
         currentPage={currentPage}
         limit={limit}
