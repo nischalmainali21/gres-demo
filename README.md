@@ -1,5 +1,7 @@
 
 ## Getting Started
+Visit the vercel deployment
+- https://gres-demo.vercel.app/
 Run Locally
 - Clone the repo.
 - install the required dependecies running:
