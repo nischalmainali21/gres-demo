@@ -17,6 +17,7 @@ const Product = () => {
         currentPage={currentPage}
         limit={limit}
         setTotalPages={setTotalPages}
+        setCurrentPage={setCurrentPage}
       />
 
       <div className="absolute -bottom-20 right-10">
