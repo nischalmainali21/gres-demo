@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import ProductsList from "@/app/product/ProductsList";
 import Pagination from "@/components/Pagination";
+import { usePage } from "@/context/PageContext";
 
 const Product = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const { currentPage, setCurrentPage } = usePage();
   const [totalPages, setTotalPages] = useState<number>(0);
   const limit = 9;
 
