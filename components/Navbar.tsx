@@ -26,13 +26,14 @@ type PropsType = {
 const Navbar = ({ userToken }: PropsType) => {
   const pathname = usePathname();
   const [nav, setNav] = useState(false);
-  const handleClick = () => setNav(!nav);
   const [open, setOpen] = useState(false);
   let decodedToken: DecodeTokenType | null = null;
   if (userToken.value) {
     decodedToken = jwtDecode(userToken?.value);
   }
   const { email, image } = decodedToken || { email: "", image: "" };
+
+  const handleClick = () => setNav(!nav);
 
   function handleAvatar() {
     console.log("image clicked");
