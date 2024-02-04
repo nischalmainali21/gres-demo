@@ -1,3 +1,4 @@
+import { obtain } from "@/app/action";
 import ImageCarousel from "@/components/ImageCarousel";
 import ProductDetailDescription from "@/components/ProductDetailDescription";
 import { ProductType } from "@/types";
@@ -11,7 +12,13 @@ async function getProductData(id: number) {
   // Perform localStorage action
   // const userToken = localStorage.getItem("userToken");
   // console.log("usertoken", userToken);
-  const res = await fetch(`https://dummyjson.com/products/${id}`);
+  const userToken = await obtain();
+  const res = await fetch(`https://dummyjson.com/auth/products/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${userToken?.value}`,
+    },
+  });
   // console.log("res", res.json());
   return res.json();
 }

@@ -8,7 +8,5 @@ export async function create(token: string) {
 export async function obtain() {
   if (cookies().has("userToken")) {
     return cookies().get("userToken");
-  } else {
-    console.log("not obtained");
   }
 }
