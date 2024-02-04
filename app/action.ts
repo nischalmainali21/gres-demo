@@ -10,3 +10,7 @@ export async function obtain() {
     return cookies().get("userToken");
   }
 }
+
+export async function remove(tokenName: string) {
+  cookies().delete(tokenName);
+}
